@@ -1,0 +1,166 @@
+<div class="d-flex align-items-center center-page-height">
+  <div class="container card text-black bg-light">
+    <div class="card-body">
+
+      <div class="pb-5">
+        <h3>Register</h3>
+      </div>
+
+      <form class="form-horizontal" role="form" [formGroup]="registerGroup">
+
+        <div class="form-group row">
+          <label for="registerUserName" class="col-md-2 col-sm-12 control-label col-form-label">User Name</label>
+          <div class="col-md-9 col-sm-12 input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-user-circle"></i></div>
+            </div>
+            <input id="registerUserName" name="registerUserName" formControlName="registerUserName"
+              class="form-control">
+          </div>
+          <div
+            *ngIf="registerGroup.get(['registerUserName']).invalid && registerGroup.get(['registerUserName']).touched"
+            class="error-message text-right col-11">
+            User Name is Required
+          </div>
+          <app-validation-error-display fieldName="UserName" [errors]="errors" class="error-message text-right col-11">
+          </app-validation-error-display>
+        </div>
+
+
+
+        <div class="form-group row">
+          <label for="registerFirstName" class="col-md-2 col-sm-12 control-label col-form-label">First Name</label>
+          <div class="col-md-9 col-sm-12 input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-user-o"></i></div>
+            </div>
+            <input id="registerFirstName" name="registerFirstName" formControlName="registerFirstName"
+              class="form-control">
+          </div>
+          <div
+            *ngIf="registerGroup.get(['registerFirstName']).invalid && registerGroup.get(['registerFirstName']).touched"
+            class="error-message text-right col-11">
+            First Name is Required
+          </div>
+          <app-validation-error-display fieldName="FirstName" [errors]="errors" class="error-message text-right col-11">
+          </app-validation-error-display>
+        </div>
+
+        <div class="form-group row">
+          <label for="registerLastName" class="col-md-2 col-sm-12 control-label col-form-label">Last Name</label>
+          <div class="col-md-9 col-sm-12 input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-user-o"></i></div>
+            </div>
+            <input id="registerLastName" name="registerLastName" type="registerLastName"
+              formControlName="registerLastName" class="form-control">
+          </div>
+          <div
+            *ngIf="registerGroup.get(['registerLastName']).invalid && registerGroup.get(['registerLastName']).touched"
+            class="error-message text-right col-11">
+            Last Name is Required
+          </div>
+          <app-validation-error-display fieldName="LastName" [errors]="errors" class="error-message text-right col-11">
+          </app-validation-error-display>
+        </div>
+
+        <div class="form-group row">
+          <label for="registerCountry" class="col-md-2 col-sm-12 control-label col-form-label">Country</label>
+          <div class="col-md-9 col-sm-12 input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-globe"></i></div>
+            </div>
+            <select id="registerCountry" name="registerCountry" formControlName="registerCountry" class="form-control">
+              <option *ngFor="let title of countryList" [value]="title.key">
+                {{title.value}}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="registerGroup.get(['registerCountry']).invalid && registerGroup.get(['registerCountry']).touched"
+            class="error-message text-right col-11">
+            Country is Required
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="registerEmail" class="col-md-2 col-sm-12 control-label col-form-label">Email</label>
+          <div class="col-md-9 col-sm-12 input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+            </div>
+            <input id="registerEmail" name="email" type="email" formControlName="registerEmail" class="form-control">
+          </div>
+          <div *ngIf="registerGroup.get(['registerEmail']).invalid && registerGroup.get(['registerEmail']).touched"
+            class="error-message text-right col-11">
+            Email is Required
+          </div>
+          <app-validation-error-display fieldName="Email" [errors]="errors" class="error-message text-right col-11">
+          </app-validation-error-display>
+        </div>
+
+        <div class="form-group row">
+          <label for="registerPassword" class="col-md-2 col-sm-12 control-label col-form-label">Password</label>
+          <div class="col-md-9 col-sm-12 input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+            </div>
+            <input id="registerPassword" name="password" type="password" formControlName="registerPassword"
+              class="form-control">
+          </div>
+          <div
+            *ngIf="registerGroup.get(['registerPassword']).invalid && registerGroup.get(['registerPassword']).touched"
+            class="error-message text-right col-11">
+            Password is Required
+          </div>
+          <app-validation-error-display fieldName="Password" [errors]="errors" class="error-message text-right col-11">
+          </app-validation-error-display>
+        </div>
+
+        <div class="form-group row">
+          <label for="registerConfirmPassword" class="col-md-2 col-sm-12 control-label col-form-label">Confirm
+            Password</label>
+          <div class="col-md-9 col-sm-12 input-group">
+            <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+            <div class="input-group-prepend">
+            </div>
+            <input id="registerConfirmPassword" name="password" type="password"
+              formControlName="registerConfirmPassword" class="form-control">
+          </div>
+          <div
+            *ngIf="registerGroup.get(['registerConfirmPassword']).invalid && registerGroup.get(['registerConfirmPassword']).touched"
+            class="error-message text-right col-11">
+            Password needs to be confirmed
+          </div>
+          <div
+            *ngIf="registerGroup.get(['registerConfirmPassword']).value != registerGroup.get(['registerPassword']).value"
+            class="error-message text-right col-11">
+            Password needs to match
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-11 text-right">
+            <label for="registerTerms"><input id="registerTerms" name="registerTerms" type="checkbox"
+                formControlName="registerTerms" class="form-check-inline"> I accept the
+                <a href="javascript:void(0);" (click)="openTermsOfService(termsmodal)">terms of service</a>
+            </label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-11 text-right">
+            <button type="button" class="btn btn-secondary mr-sm-2" routerLink=""
+              routerLinkActive="active">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="registerUser()"><i
+                class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="loading"></i> Register</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #termsmodal let-modal>  
+    <app-terms-of-service></app-terms-of-service>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+    </div>
+</ng-template>

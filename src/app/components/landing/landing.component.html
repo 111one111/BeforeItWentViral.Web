@@ -1,0 +1,46 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" routerLink="" routerLinkActive="active"><i class="fa fa-mobile mr-sm-2" aria-hidden="true"></i> Before It Went Viral</a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"
+            (click)="toggleCollapse()">
+        <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarColor01" [class.collapse]="isCollapsed" >
+        <ul class="navbar-nav mr-auto">
+        <li *ngIf="!userLoggedIn" class="nav-item">
+            <a class="nav-link" routerLink="login/register" routerLinkActive="Active">Register</a>
+        </li>
+        <li *ngIf="userLoggedIn">
+            <a class="nav-link" routerLink="/pagemanagement" routerLinkActive="Active">Page Management</a>
+        </li>
+        <li *ngIf="userLoggedIn">
+            <a class="nav-link" routerLink="account" routerLinkActive="Active">Account</a>
+        </li>
+        <li>
+            <a class="nav-link" routerLink="pricing" routerLinkActive="Active">Pricing</a>
+        </li>
+        <li>
+            <a class="nav-link" routerLink="aboutus" routerLinkActive="Active">About Us</a>
+        </li>
+        <li>
+            <a class="nav-link" href="javascript:void(0);" (click)="openTermsOfService(termsmodal)">Terms Of Service</a>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" placeholder="Search" type="text" (change)="updateSearch($event.target.value)">
+        <button class="btn btn-secondary mr-sm-2" (click)="search()">Search</button>
+        </form>
+        <button  *ngIf="!userLoggedIn" class="btn btn-secondary mr-sm-2" routerLink="login" routerLinkActive="active">Login</button>
+        <button  *ngIf="userLoggedIn" class="btn btn-secondary mr-sm-2" (click)="logout($event)">Logout</button>
+    </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<ng-template #termsmodal let-modal>  
+    <app-terms-of-service></app-terms-of-service>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+    </div>
+</ng-template>

@@ -1,0 +1,163 @@
+<div class="container card text-black bg-light">
+  <div class="card-body" >
+
+    <div class = "row">
+      <h3>Create A Page</h3>
+    </div>
+
+    <form class="form-horizontal" role="form" [formGroup]="createPageGroup">
+
+      <div class="form-group row">
+        <div class="col-md-4 col-sm-12"></div>
+        <div class="col-md-8 col-sm-12">
+          <fieldset class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" value=true type="radio" name="pageType" (change) = "radioButtonChange(true)">
+                Custom Html Page
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input  class="form-check-input" value=false type="radio" name="pageType" checked="checked" (change) = "radioButtonChange(false)">
+                Default Page
+              </label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class = "form-group row">
+        <label for = "pageName" class="col-md-4 col-sm-12 control-label col-form-label">Page Name</label>
+        <div class="col-md-8 col-sm-12 input-group">
+         <input id = "pageName" name="pageName" formControlName="pageName" class="form-control">
+        </div>
+        <div *ngIf="createPageGroup.get(['pageName']).invalid && createPageGroup.get(['pageName']).touched" class="error-message text-right col-12">
+          Page Name is Required
+        </div>
+          <app-validation-error-display fieldName="PageName" [errors] = "errors" class="error-message text-right col-12"></app-validation-error-display>
+        </div>
+
+      <div class = "form-group row">
+        <label for = "heading" class="col-md-4 col-sm-12 control-label col-form-label">Heading</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <input id = "heading" name="heading" formControlName="heading" class="form-control">
+        </div>
+        <div *ngIf="createPageGroup.get(['heading']).invalid && createPageGroup.get(['heading']).touched" class="error-message text-right col-12">
+          Heading is Required
+        </div>
+        <app-validation-error-display fieldName="Heading" [errors] = "errors" class="error-message text-right col-12"></app-validation-error-display>
+      </div>
+
+      <div class = "form-group row">
+        <label for = "description" class="col-md-4 col-sm-12 control-label col-form-label">Description</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <textarea id = "description" name="description" formControlName="description" class="form-control" rows="4"></textarea>
+        </div>
+      </div>
+
+      <div class = "form-group row" *ngIf="advancedPage">
+        <label for = "headingColor" class="col-md-4 col-sm-12 control-label col-form-label">Heading Color</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <input id = "headingColor" name="headingColor" formControlName="headingColor" class="form-control">
+        </div>
+        <app-validation-error-display fieldName="HeadingColor" [errors] = "errors" class="error-message text-right col-12"></app-validation-error-display>
+      </div>
+
+      <div class = "form-group row" *ngIf="advancedPage">
+        <label for = "headingFont" class="col-md-4 col-sm-12 control-label col-form-label">Select Heading Font</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <select id = "headingFont" name="headingFont" formControlName="headingFont" class="form-control">
+            <option *ngFor="let font of fontList" [value] = "font.key">
+              {{font.value}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class = "form-group row">
+        <label for = "smallPictureFile" class="col-md-4 col-sm-12 control-label col-form-label">Small Image For Title Screen</label>
+          <app-input-file-control class="col-md-8 col-sm-12" id = "smallPictureFile" fileTypes="image/jpeg, image/png, image/tiff" (file)="saveSmallPictureFileId($event)" isRequired="true"
+                                  errorMessage="Need an image for users to see when there browsing the apps." [showInvalidMessage] = "isSmallPictureInvalid" 
+                                  [urlCreateImage]="createSmallImageUrl" [urlUpdateImage]="updateSmallImageUrl"></app-input-file-control>
+      </div>
+        <div *ngIf="createPageGroup.get(['smallPictureFile']).invalid && createPageGroup.get(['smallPictureFile']).touched"  class="error-message text-right col-12">
+          We need an image for users to see when there browsing the apps list.
+        </div>
+
+      <div class = "form-group row">
+        <label for = "bannerPictureFile" class="col-md-4 col-sm-12 control-label col-form-label">Banner Image For The Top Of The Screen</label>
+        <app-input-file-control class="col-md-8 col-sm-12" id = "bannerPictureFile" fileTypes="image/jpeg, image/png, image/tiff" (file)="saveBanner1PictureFileId($event)" isRequired="true"
+                                errorMessage="Its a good idea to have a banner picture." [showInvalidMessage] = "isBanner1PictureInvalid"
+                                [urlCreateImage]="createLargeImageUrl" [urlUpdateImage]="updateLargeImageUrl">
+                              </app-input-file-control>
+      </div>
+
+
+      <div class = "form-group row" *ngIf="advancedPage">
+        <label for = "pageBackgroundColor" class="col-md-4 col-sm-12 control-label col-form-label">Background Color</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <input id = "pageBackgroundColor" name="pageBackgroundColor" formControlName="pageBackgroundColor" class="form-control">
+        </div>
+        <app-validation-error-display fieldName="PageBackgroundColor" [errors] = "errors" class="error-message text-right col-12"></app-validation-error-display>
+      </div>
+
+      <div class = "form-group row" *ngIf="advancedPage">
+        <label for = "userHtml" class="col-md-4 col-sm-12 control-label col-form-label">Custom Html</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <textarea id = "userHtml" name="userHtml" formControlName="userHtml" class="form-control" rows="10"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-4 col-sm-12 control-label col-form-label">Select What Device Type Your App Is For</label>
+        <div class="col-md-8 col-sm-12">
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-secondary" ngbButtonLabel>
+              <input type="checkbox" formControlName="androidCompat" ngbButton > Android Device
+            </label>
+            <label class="btn btn-secondary" ngbButtonLabel>
+              <input type="checkbox" formControlName="iphoneCompat" ngbButton > IPhone Device
+            </label>
+            <label class="btn btn-secondary" ngbButtonLabel>
+              <input type="checkbox" formControlName="winPhoneCompat" ngbButton > Windows Phone
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class = "form-group row"  *ngIf="this.createPageGroup.get('androidCompat').value">
+        <label for = "pageBackgroundColor" class="col-md-4 col-sm-12 control-label col-form-label">Link For Google Play</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <input id = "linkButtonAndroid" name="linkButtonAndroid" formControlName="linkButtonAndroid" class="form-control">
+        </div>
+        <app-validation-error-display fieldName="LinkButtonAndroid" [errors] = "errors" class="error-message text-right col-12"></app-validation-error-display>
+      </div>
+
+      <div class = "form-group row"  *ngIf="this.createPageGroup.get('iphoneCompat').value">
+        <label for = "pageBackgroundColor" class="col-md-4 col-sm-12 control-label col-form-label">Link For The Apple App Store</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <input id = "linkButtonIPhone" name="linkButtonIPhone" formControlName="linkButtonIPhone" class="form-control">
+        </div>
+        <app-validation-error-display fieldName="LinkButtonIPhone" [errors] = "errors" class="error-message text-right col-12"></app-validation-error-display>
+      </div>
+
+      <div class = "form-group row" *ngIf="this.createPageGroup.get('winPhoneCompat').value">
+        <label for = "pageBackgroundColor" class="col-md-4 col-sm-12 control-label col-form-label">Link For Windows App Store</label>
+        <div class="col-md-8 col-sm-12 input-group">
+          <input id = "linkButtonWinPhone" name="linkButtonWinPhone" formControlName="linkButtonWinPhone" class="form-control">
+        </div>
+        <app-validation-error-display fieldName="LinkButtonWinPhone" [errors] = "errors" class="error-message text-right col-12"></app-validation-error-display>
+      </div>
+
+      <div class = "form-group row">
+        <div class="col-12 text-right">
+          <button type="button" class="btn btn-secondary mr-sm-2" routerLink="/pagemanagment" routerLinkActive="active" >Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="createPage()"><i class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="loading"></i> Create Page</button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

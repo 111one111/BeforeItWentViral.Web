@@ -1,0 +1,75 @@
+<div class="container card text-black bg-light">
+  <div class="card-body" >
+
+    <div class = "row pb-3">
+      <h2>Page Management</h2>
+    </div>
+
+    <div class = "row pb-1 pl-3">
+      <a class="btn btn-outline-info" routerLink="createpage" routerLinkActive="active">Create Page</a>
+    </div>
+
+    <div class="card text-white bg-primary">
+      <div class="card-header"><h4>Your Page List</h4></div>
+        <div *ngFor="let page of pages">
+          <div class="card-body">
+            <div class="row">
+              <div class = "col-sm-12 col-md-2 pr-0  pl-0">
+              <div class="headerRow card-text">
+                Page Name
+              </div>
+              <div class="pt-md-3 pl-3">
+                {{page.pageName}}
+              </div>
+              </div>
+              <div class = "col-sm-12 col-md-2  pr-0 pl-0">
+                <div class = "headerRow card-text">Plan</div>
+                <div class="pt-md-3  pl-sm-3 pl-lg-0">
+                  <a>{{page.plan}}</a>
+                </div>
+              </div>
+
+
+              <div class = "col-sm-12 col-md-2  pr-0 pl-0">
+                <div class = "headerRow card-text">Status</div>
+                <div *ngIf="page.plan">
+                  <div class="pt-md-3  pl-sm-3 pl-lg-0" *ngIf="page.isActive">
+                     <a>Active</a>
+                  </div>
+                  <div class="pt-md-3  pl-sm-3 pl-lg-0" *ngIf="!page.isActive || page.isActive === null">
+                    <a>Disabled</a>
+                  </div>
+                </div>
+              </div>
+              <div class = "col-sm-12 col-md-3 pr-0 pl-0">
+                <div class = "headerRow card-text">Active Toggle</div>
+                  <div *ngIf="page.plan">
+                   <div *ngIf="page.isActive" class="pt-2 pr-lg-2">
+                     <button class="btn btn-outline-danger btn-block" (click)="disablePage(page)"
+                     >Deactivate</button>
+                   </div>
+                  <div *ngIf="!page.isActive" class="pt-2 pr-lg-2">
+                    <button class="btn btn-outline-success btn-block" (click)="enablePage(page)"
+                    >Activate</button>
+                  </div>
+                 </div>
+              </div>
+              <div class = "col-sm-12 col-md-3 pl-0 pr-0">
+                <div class = "headerRow card-text">Edit Page</div>
+                <div class="pt-2">
+                <a class="btn btn-outline-warning btn-block" (click)="editPage(page)">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="pl-4 pb-2">
+      <a class="btn btn-primary" routerLink="" routerLinkActive="active"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+
+  <div class="d-flex align-items-center center-page-height">
+    <div class="container card text-black bg-light">
+      <div class="card-body">
+
+        <div class="pb-5">
+          <h3>Login</h3>
+        </div>
+
+        <form class="form-horizontal" role="form" [formGroup]="loginGroup">
+
+          <div class = "form-group row">
+            <label for = "loginUserName" class="col-md-2 col-sm-12 control-label col-form-label">User Name</label>
+              <div class="col-md-9 col-sm-12 input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-user-circle"></i></div>
+                </div>
+                <input id = "loginUserName" name="loginUserName" formControlName="loginUserName" class="form-control">
+              </div>
+          </div>
+
+          <div class = "form-group row">
+            <label for = "loginPassword" class="col-md-2 col-sm-12 control-label col-form-label">Password</label>
+            <div class="col-md-9 col-sm-12 input-group">
+              <div class="input-group-prepend">
+              <div class="input-group-text" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+            </div>
+              <input id = "loginPassword" name="password" type="password" formControlName="loginPassword" class="form-control">
+            </div>
+          </div>
+        <div class = "form-group row">
+          <div class="col-11 text-right">       
+          <a routerLink="/login/lostpassword" routerLinkActive="active">Have you forgotten your password?</a>
+          <div class ="pt-2 pb-2">
+            <button type="button" class="btn btn-secondary mr-sm-2" routerLink="" routerLinkActive="active" >Cancel</button>
+            <button type="submit" class="btn btn-primary" (click)="login()" >Login</button>           
+          </div>
+          <a routerLink="/login/register" routerLinkActive="active">Register now?</a>
+        </div>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>

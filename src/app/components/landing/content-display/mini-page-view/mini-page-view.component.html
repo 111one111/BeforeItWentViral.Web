@@ -1,0 +1,16 @@
+<div class="card" (click)="goToPage()" style="cursor: pointer;">
+
+  <div class="pl-3" style="height: 20px;">
+    <div class="row">
+      <div style="width: 2.6rem" *ngIf="miniPageData.iphoneCompat"><i class="fab fa-apple"></i></div>
+      <div style="width: 2.6rem" *ngIf="miniPageData.androidCompat"><i class="fab fa-android"></i></div>
+      <div style="width: 2.6rem" *ngIf="miniPageData.winPhoneCompat"><i class="fab fa-windows"></i></div>
+    </div>
+  </div>
+
+  <img width="200px" height="200px" alt="Loading..." class="card-img">
+
+  <div class="card-footer">
+    <span>{{miniPageData.heading}}</span>
+  </div>
+</div>
